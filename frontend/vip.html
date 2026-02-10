@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIP Reward</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container vip-page">
+        <header class="vip-header">
+            <button class="back-btn-white" onclick="history.back()">← VIP REWARD</button>
+        </header>
+
+        <section class="vip-intro">
+            <h1>Complete the task<br>and upgrade to<br><span class="vip-highlight">VIP level</span></h1>
+        </section>
+
+        <section class="vip-current">
+            <h3>VIP0</h3>
+            <div class="progress-item">Team Members: <span id="teamCount">0</span></div>
+            <div class="progress-item">Total Balance: <span id="totalBalance">0</span> USDT</div>
+        </section>
+
+        <section class="vip-table-section">
+            <h3>VIP reward</h3>
+            <table class="vip-table">
+                <thead>
+                    <tr>
+                        <th>VIP Level</th>
+                        <th>Bonus Rewards</th>
+                        <th>Level 1 Rewards</th>
+                        <th>Level 2 Rewards</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Lv.1</td>
+                        <td>25U</td>
+                        <td>40.00%</td>
+                        <td>20.00%</td>
+                    </tr>
+                    <tr>
+                        <td>Lv.2</td>
+                        <td>100U</td>
+                        <td>40.00%</td>
+                        <td>20.00%</td>
+                    </tr>
+                    <tr>
+                        <td>Lv.3</td>
+                        <td>400U</td>
+                        <td>40.00%</td>
+                        <td>20.00%</td>
+                    </tr>
+                    <tr>
+                        <td>Lv.4</td>
+                        <td>1000U</td>
+                        <td>60.00%</td>
+                        <td>30.00%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="invitations-section">
+            <h3>Today's Invitations</h3>
+            <div class="invitation-row">
+                <span>Invite 1 People</span>
+                <span>Give Away 1 USDT</span>
+            </div>
+            <div class="invitation-row">
+                <span>Invite 10 People</span>
+                <span>Give Away 10 USDT</span>
+            </div>
+        </section>
+
+        <section class="invitations-section">
+            <h3>This Week's Invitations</h3>
+            <div class="invitation-row">
+                <span>Invite 10 People</span>
+                <span>Give Away 10 USDT</span>
+            </div>
+            <div class="invitation-row">
+                <span>Invite 30 People</span>
+                <span>Give Away 30 USDT</span>
+            </div>
+        </section>
+
+        <section class="invitations-section">
+            <h3>This Month's Invitations</h3>
+            <div class="invitation-row">
+                <span>Invite 60 People</span>
+                <span>Give Away 60 USDT</span>
+            </div>
+            <div class="invitation-row">
+                <span>Invite 200 People</span>
+                <span>Give Away 200 USDT</span>
+            </div>
+        </section>
+    </div>
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script>
+        async function loadVIPData() {
+            try {
+                const balance = await api.getBalance();
+                document.getElementById('totalBalance').textContent = balance.balance.toFixed(2);
+                
+                const profile = await api.getProfile();
+                const teamRes = await fetch(`http://localhost:3001/api/users/team/${profile.inviteCode}`, {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                const team = await teamRes.json();
+                document.getElementById('teamCount').textContent = team.length;
+            } catch (err) {
+                console.error('Failed to load VIP data:', err);
+            }
+        }
+        loadVIPData();
+    </script>
+</body>
+</html>

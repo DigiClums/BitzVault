@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="property-header">
+            <h2>Property</h2>
+        </header>
+
+        <section class="total-assets">
+            <p class="assets-label">Total assets (USDT)</p>
+            <h1 class="assets-amount" id="balance">0.00</h1>
+            <p class="assets-inr">≈ <span id="balanceInr">0.00</span> INR</p>
+        </section>
+
+        <section class="roll-buttons">
+            <button class="roll-btn" onclick="window.location.href='recharge.html'">
+                <span>💼</span>
+                <span>Deposit</span>
+            </button>
+            <button class="roll-btn" onclick="window.location.href='withdraw.html'">
+                <span>💼</span>
+                <span>Withdraw</span>
+            </button>
+        </section>
+
+        <section class="property-list">
+            <h3>Property list</h3>
+
+            <div class="asset-item">
+                <div class="asset-name">USDT</div>
+                <div class="asset-details">
+                    <span>total 0</span>
+                    <span>valuation ≈₹0.00</span>
+                </div>
+            </div>
+
+            <div class="asset-item">
+                <div class="asset-name">SOL</div>
+                <div class="asset-details">
+                    <span>total 0</span>
+                    <span>valuation ≈₹0.00</span>
+                </div>
+            </div>
+
+            <div class="asset-item">
+                <div class="asset-name">ETH</div>
+                <div class="asset-details">
+                    <span>total 0</span>
+                    <span>valuation ≈₹0.00</span>
+                </div>
+            </div>
+
+            <div class="asset-item">
+                <div class="asset-name">BTC</div>
+                <div class="asset-details">
+                    <span>total 0</span>
+                    <span>valuation ≈₹0.00</span>
+                </div>
+            </div>
+
+            <div class="asset-item">
+                <div class="asset-name">PEPE</div>
+                <div class="asset-details">
+                    <span>total 0</span>
+                    <span>valuation ≈₹0.00</span>
+                </div>
+            </div>
+
+            <div class="asset-item">
+                <div class="asset-name">SHIB</div>
+                <div class="asset-details">
+                    <span>total 0</span>
+                    <span>valuation ≈₹0.00</span>
+                </div>
+            </div>
+
+            <div class="asset-item">
+                <div class="asset-name">XEC</div>
+                <div class="asset-details">
+                    <span>total 0</span>
+                    <span>valuation ≈₹0.00</span>
+                </div>
+            </div>
+
+            <div class="asset-item">
+                <div class="asset-name">BONK</div>
+                <div class="asset-details">
+                    <span>total 0</span>
+                    <span>valuation ≈₹0.00</span>
+                </div>
+            </div>
+
+            <div class="asset-item">
+                <div class="asset-name">WIN</div>
+                <div class="asset-details">
+                    <span>total 0</span>
+                    <span>valuation ≈₹0.00</span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="bottom-nav">
+            <div class="nav-item" onclick="window.location.href='personal.html'">
+                <span>👤</span>
+                <span>PERSONAL</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='market.html'">
+                <span>📊</span>
+                <span>MARKET</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='index.html'">
+                <div class="home-btn">🏠</div>
+            </div>
+            <div class="nav-item">
+                <span>💱</span>
+                <span>TRADE</span>
+            </div>
+            <div class="nav-item active">
+                <span>🏢</span>
+                <span>PROPERTY</span>
+            </div>
+        </nav>
+    </div>
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script>
+        async function loadBalance() {
+            try {
+                const data = await api.getBalance();
+                document.getElementById('balance').textContent = data.balance.toFixed(2);
+                document.getElementById('balanceInr').textContent = (data.balance * 83.5).toFixed(2);
+            } catch (err) {
+                console.error('Failed to load balance:', err);
+            }
+        }
+        loadBalance();
+    </script>
+</body>
+</html>

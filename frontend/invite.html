@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <button class="back-btn" onclick="history.back()">← INVITE</button>
+        </header>
+
+        <section class="invite-hero">
+            <div class="gift-illustration">🎁</div>
+            <h2>Refer & Earn</h2>
+            <p class="invite-subtitle">Invite friends to receive generic rewards</p>
+        </section>
+
+        <section class="invite-codes">
+            <div class="code-row">
+                <span class="code-label">INVITATION CODE</span>
+                <div class="code-value">
+                    <span id="inviteCode">Loading...</span>
+                    <button class="copy-btn" onclick="copyCode()">📋</button>
+                </div>
+            </div>
+            <div class="code-row">
+                <span class="code-label">INVITATION LINK</span>
+                <div class="code-value">
+                    <span id="inviteLink" style="font-size:12px;">Loading...</span>
+                    <button class="copy-btn" onclick="copyLink()">📋</button>
+                </div>
+            </div>
+        </section>
+
+        <button class="refer-btn" onclick="copyLink()">Share Invite Link</button>
+
+        <section class="invite-info">
+            <p>*When inviting friends, please save and use the latest invitation link or QR code to avoid issues such as invalid invitation codes.</p>
+            <p>*Use your phone's default browser or any other browser to scan the QR code for registration or download.</p>
+            <p>*Our platform officers a multi-level reward system — the more friends you invite, the more rewards you earn. To maximize your rewards, keep sharing and promoting!</p>
+            <p>*NovaBit IN reserves the final right of interpretation for all invitation-related promotional rewards.</p>
+        </section>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script>
+        async function loadInviteCode() {
+            try {
+                const profile = await api.getProfile();
+                const code = profile.inviteCode;
+                const link = `${window.location.origin}/register.html?invite=${code}`;
+                
+                document.getElementById('inviteCode').textContent = code;
+                document.getElementById('inviteLink').textContent = link;
+            } catch (err) {
+                console.error('Failed to load invite code:', err);
+            }
+        }
+
+        function copyCode() {
+            const code = document.getElementById('inviteCode').textContent;
+            navigator.clipboard.writeText(code);
+            alert('Invite code copied!');
+        }
+
+        function copyLink() {
+            const link = document.getElementById('inviteLink').textContent;
+            navigator.clipboard.writeText(link);
+            alert('Invite link copied!');
+        }
+
+        loadInviteCode();
+    </script>
+</body>
+</html>

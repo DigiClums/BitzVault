@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaBit IN</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="search-bar">
+            <input type="text" placeholder="search coins">
+        </div>
+
+        <section class="balance-section">
+            <p class="balance-label">Total Balance [USDT]</p>
+            <h1 class="balance-amount" id="balance">0.00</h1>
+            <p class="balance-inr">≈ <span id="balanceInr">0.00</span> INR</p>
+        </section>
+
+        <section class="quick-actions">
+            <div class="action-card" onclick="quickBuy()">
+                <div class="action-icon">🪙</div>
+                <div class="action-text">
+                    <strong>Quick Buy</strong>
+                    <span>Coins</span>
+                </div>
+            </div>
+            <div class="action-card" onclick="otcTrading()">
+                <div class="action-icon">📱</div>
+                <div class="action-text">
+                    <strong>OTC Trading</strong>
+                </div>
+            </div>
+        </section>
+
+        <section class="rewards-menu">
+            <div class="reward-item" onclick="navigate('invite')">
+                <div class="reward-icon">👥</div>
+                <div class="reward-label">Invite</div>
+            </div>
+            <div class="reward-item" onclick="navigate('team')">
+                <div class="reward-icon">⚙️</div>
+                <div class="reward-label">Team</div>
+            </div>
+            <div class="reward-item" onclick="navigate('vip')">
+                <div class="reward-icon">💎</div>
+                <div class="reward-label">VIP Reward</div>
+            </div>
+            <div class="reward-item" onclick="navigate('commission')">
+                <div class="reward-icon">📊</div>
+                <div class="reward-label">Commission</div>
+            </div>
+        </section>
+
+        <section class="promo-section">
+            <div class="promo-card">
+                <h3>Invitation to Register</h3>
+                <p>Up to <strong>1000USDT</strong> can be obtained</p>
+                <button class="go-btn">Go →</button>
+                <div class="promo-img">🎁</div>
+            </div>
+            <div class="btc-card">
+                <div class="btc-icon">₿</div>
+                <div class="btc-info">
+                    <strong>BTC</strong>
+                    <span class="btc-change negative">▼1.007%</span>
+                </div>
+                <div class="btc-price">69266.82</div>
+                <div class="btc-chart">📈</div>
+            </div>
+        </section>
+
+        <section class="currency-subscription">
+            <div class="sub-card">
+                <div class="sub-icon">💱</div>
+                <span>New currency subscription</span>
+                <span class="arrow">→</span>
+            </div>
+        </section>
+
+        <section class="announcement">
+            <span class="announcement-icon">🎉</span>
+            <span>NovaBit IN | Invite Friends and Enjoy 2026 Event Announcement</span>
+        </section>
+
+        <section class="charts-section">
+            <h2>THE CHARTS</h2>
+            <div class="chart-header">
+                <span>Currency</span>
+                <span>Latest price</span>
+                <span>Rise & Fall</span>
+            </div>
+            <div class="chart-item">
+                <div class="coin-info">
+                    <div class="coin-icon">🔷</div>
+                    <div>
+                        <strong>ONT</strong> <span class="pair">USDT</span>
+                        <div class="coin-value">2320288.02</div>
+                    </div>
+                </div>
+                <div class="price">68.95<br><span class="inr">₹182610.00</span></div>
+                <div class="change positive">+5.752%</div>
+            </div>
+            <div class="chart-item">
+                <div class="coin-info">
+                    <div class="coin-icon">⚡</div>
+                    <div>
+                        <strong>ZEC</strong> <span class="pair">USDT</span>
+                    </div>
+                </div>
+                <div class="price">241.53</div>
+                <div class="change positive">+2.589%</div>
+            </div>
+        </section>
+
+        <nav class="bottom-nav">
+            <div class="nav-item" onclick="window.location.href='personal.html'">
+                <span>👤</span>
+                <span>PERSONAL</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='market.html'">
+                <span>📊</span>
+                <span>MARKET</span>
+            </div>
+            <div class="nav-item active">
+                <div class="home-btn">🏠</div>
+            </div>
+            <div class="nav-item">
+                <span>💱</span>
+                <span>TRADE</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='property.html'">
+                <span>🏢</span>
+                <span>PROPERTY</span>
+            </div>
+        </nav>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script src="script.js"></script>
+    <script>
+        async function loadBalance() {
+            try {
+                const data = await api.getBalance();
+                document.getElementById('balance').textContent = data.balance.toFixed(2);
+                document.getElementById('balanceInr').textContent = (data.balance * 83.5).toFixed(2);
+            } catch (err) {
+                console.error('Failed to load balance:', err);
+            }
+        }
+        loadBalance();
+    </script>
+</body>
+</html>

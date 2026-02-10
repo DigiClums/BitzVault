@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Coins</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <button class="back-btn" onclick="history.back()">← WITHDRAW COINS</button>
+            <a href="#" class="withdraw-records">Withdrawal Records</a>
+        </header>
+
+        <section class="form-section">
+            <label>Receiving Type</label>
+            <div class="select-box" onclick="toggleReceivingType()">
+                <span id="selectedType">USDT (TRC20)</span>
+                <span class="arrow">→</span>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <label>Choose Net</label>
+            <div class="net-box">TRC20</div>
+        </section>
+
+        <section class="form-section">
+            <label>Wallet Address</label>
+            <input type="text" placeholder="Please Enter Wallet Address" id="walletAddress">
+        </section>
+
+        <section class="form-section">
+            <label>Withdrawal Amount</label>
+            <input type="number" placeholder="Minimum 138 USDT" id="withdrawAmount" min="138">
+            <div class="fee-info">
+                <span class="available">Available: <span id="availableBalance">0</span> USDT</span>
+            </div>
+        </section>
+
+        <button class="submit-btn" onclick="submitWithdraw()">Submit Order</button>
+
+        <section class="withdraw-info">
+            <p>*Minimum withdrawal amount per transaction is 138 USDT. Please carefully verify the withdrawal details to ensure your funds are credited correctly.</p>
+            <p>*All withdrawal orders will be processed within 72 hours. The actual credit time may vary based on wallet confirmation details.</p>
+        </section>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script src="withdraw.js"></script>
+    <script>
+        async function loadBalance() {
+            try {
+                const data = await api.getBalance();
+                document.getElementById('availableBalance').textContent = data.balance.toFixed(2);
+            } catch (err) {
+                console.error('Failed to load balance:', err);
+            }
+        }
+        loadBalance();
+    </script>
+</body>
+</html>

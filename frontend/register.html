@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - NovaBit IN</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <section class="auth-section">
+            <h1>Create Account</h1>
+            <p>Register to get started</p>
+
+            <form id="registerForm" class="auth-form">
+                <input type="tel" id="phone" placeholder="Phone Number" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <input type="text" id="inviteCode" placeholder="Invite Code (Optional)">
+                <button type="submit" class="submit-btn">Register</button>
+            </form>
+
+            <p class="auth-link">Already have an account? <a href="login.html">Login</a></p>
+        </section>
+    </div>
+
+    <script src="api.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const phone = document.getElementById('phone').value;
+            const password = document.getElementById('password').value;
+            const inviteCode = document.getElementById('inviteCode').value;
+            
+            try {
+                const result = await api.register(phone, password, inviteCode);
+                localStorage.setItem('token', result.token);
+                localStorage.setItem('userId', result.userId);
+                window.location.href = 'index.html';
+            } catch (err) {
+                alert(err.message || 'Registration failed');
+            }
+        });
+    </script>
+</body>
+</html>

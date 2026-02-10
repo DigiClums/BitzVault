@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commission Pool</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <button class="back-btn" onclick="history.back()">← COMMISSION POOL</button>
+            <a href="money.html" class="commission-records">Transaction History</a>
+        </header>
+
+        <section class="commission-intro">
+            <h2>Complete tasks and receive generous commissions</h2>
+            <p>Completing <span class="highlight-text">two tasks</span> can earn rewards</p>
+            <div class="commission-illustration">💰</div>
+        </section>
+
+        <section class="commission-earned">
+            <p class="earned-label">TOTAL BALANCE</p>
+            <h1 class="earned-amount" id="balance">0<span class="earned-unit">/0.00 USDT</span></h1>
+        </section>
+
+        <section class="tasks-section">
+            <div class="task-card">
+                <div class="task-header">
+                    <span class="task-number">1</span>
+                    <span class="task-title">Invite people</span>
+                </div>
+                <div class="task-progress">
+                    <div class="task-icon">👥</div>
+                    <div class="task-bar">
+                        <div class="task-bar-fill" id="inviteProgress" style="width: 0%"></div>
+                        <span class="task-bar-text" id="inviteCount">0 invited</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="task-card">
+                <div class="task-header">
+                    <span class="task-number">2</span>
+                    <span class="task-title">Invest money</span>
+                </div>
+                <div class="task-progress">
+                    <div class="task-icon">💵</div>
+                    <div class="task-bar">
+                        <div class="task-bar-fill" id="investProgress" style="width: 0%"></div>
+                        <span class="task-bar-text" id="investAmount">0.00 USDT</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <button class="claim-btn" onclick="window.location.href='invite.html'">Invite Friends</button>
+
+        <section class="commission-info">
+            <p>*Earn commission by inviting friends and investing in the platform.</p>
+            <p>*The more you invest and invite, the higher your commission rewards.</p>
+            <p>*NovaBit IN reserves the final right of interpretation for all commission-related promotional rewards.</p>
+        </section>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script>
+        async function loadCommission() {
+            try {
+                const balance = await api.getBalance();
+                document.getElementById('balance').innerHTML = `${balance.balance.toFixed(2)}<span class="earned-unit"> USDT</span>`;
+                
+                const profile = await api.getProfile();
+                const teamRes = await fetch(`http://localhost:3001/api/users/team/${profile.inviteCode}`, {
+                    headers: { 'Authorization': `Bearer ${localStorage.getItem('token')}` }
+                });
+                const team = await teamRes.json();
+                
+                const inviteCount = team.length || 0;
+                document.getElementById('inviteCount').textContent = `${inviteCount} invited`;
+                document.getElementById('inviteProgress').style.width = Math.min(inviteCount * 10, 100) + '%';
+                
+                const investPercent = Math.min((balance.balance / 1000) * 100, 100);
+                document.getElementById('investAmount').textContent = `${balance.balance.toFixed(2)} USDT`;
+                document.getElementById('investProgress').style.width = investPercent + '%';
+            } catch (err) {
+                console.error('Failed to load commission:', err);
+            }
+        }
+        loadCommission();
+    </script>
+</body>
+</html>

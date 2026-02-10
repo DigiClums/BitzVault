@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="deposit-header">
+            <button class="back-btn" onclick="history.back()">←</button>
+            <h2>Deposit</h2>
+            <span></span>
+        </header>
+
+        <section class="network-section">
+            <p class="network-label">TRC20</p>
+        </section>
+
+        <section class="qr-section">
+            <div class="qr-code">
+                <div class="qr-placeholder">📱</div>
+            </div>
+        </section>
+
+        <section class="address-section">
+            <label>Deposit Address</label>
+            <div class="address-box">
+                <span id="depositAddress">TMAJhaEGVcYLCzn99qro6hMjjukR4AGJUQ</span>
+            </div>
+        </section>
+
+        <section class="form-section">
+            <label>Deposit Amount (USDT)</label>
+            <input type="number" id="depositAmount" placeholder="Enter amount (min 100 USDT)" min="100">
+        </section>
+
+        <button class="copy-address-btn" onclick="copyAddress()">Copy Address</button>
+        <button class="submit-btn" onclick="confirmDeposit()">Confirm Deposit</button>
+
+        <section class="deposit-info">
+            <p>*The minimum amount for a single recharge is 100 USDT. Please do not recharge below the minimum limit, otherwise the funds will not be credited and cannot be refunded.</p>
+            <p>*Do not send any assets other than USDT to the above address. Other assets will not be credited and cannot be refunded.</p>
+            <p>*Please use the TRON (TRC-20) network for recharging. Do not make cross-chain transfers, as cross-chain transactions will not be credited and cannot be refunded.</p>
+            <p>*Please ensure that you have read and understand the above conditions before proceeding with the recharge. The platform will not be held responsible for any asset loss caused by failure to follow these conditions.</p>
+        </section>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script src="recharge.js"></script>
+</body>
+</html>

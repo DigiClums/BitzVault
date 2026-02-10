@@ -1,0 +1,1771 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f5f5f5;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #fff;
+    min-height: 100vh;
+    padding-bottom: 70px;
+}
+
+.search-bar {
+    padding: 15px;
+    background: #f0f0f0;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    font-size: 14px;
+}
+
+.balance-section {
+    padding: 40px 20px;
+    background: #0a1628;
+    color: white;
+    border-radius: 0 0 20px 20px;
+}
+
+.balance-label {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-bottom: 10px;
+}
+
+.balance-amount {
+    font-size: 56px;
+    font-weight: 300;
+    margin: 10px 0;
+}
+
+.balance-inr {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.quick-actions {
+    display: flex;
+    gap: 15px;
+    padding: 20px;
+}
+
+.action-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    cursor: pointer;
+}
+
+.action-icon {
+    font-size: 32px;
+}
+
+.action-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 13px;
+}
+
+.action-text strong {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.rewards-menu {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background: #fff;
+}
+
+.reward-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.reward-icon {
+    font-size: 32px;
+    background: #f5f5f5;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.reward-label {
+    font-size: 12px;
+    color: #333;
+    text-align: center;
+}
+
+.promo-section {
+    display: flex;
+    gap: 15px;
+    padding: 0 20px 20px;
+}
+
+.promo-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: relative;
+}
+
+.promo-card h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.promo-card p {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.go-btn {
+    background: #1e40af;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.promo-img {
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    font-size: 40px;
+}
+
+.btc-card {
+    flex: 1;
+    background: #f5e6d3;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.btc-icon {
+    font-size: 28px;
+    color: #f7931a;
+}
+
+.btc-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btc-change {
+    background: #dc2626;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+}
+
+.btc-price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btc-chart {
+    font-size: 24px;
+}
+
+.currency-subscription {
+    padding: 0 20px 20px;
+}
+
+.sub-card {
+    background: #f5f5f5;
+    border-radius: 12px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.sub-icon {
+    font-size: 24px;
+}
+
+.arrow {
+    margin-left: auto;
+    font-size: 18px;
+}
+
+.announcement {
+    padding: 15px 20px;
+    background: #f0f9ff;
+    margin: 0 20px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.charts-section {
+    padding: 20px;
+}
+
+.charts-section h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.chart-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 10px 0;
+    font-size: 12px;
+    color: #999;
+    border-bottom: 1px solid #eee;
+}
+
+.chart-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    padding: 15px 0;
+    align-items: center;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.coin-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.coin-icon {
+    font-size: 24px;
+}
+
+.pair {
+    color: #999;
+    font-size: 12px;
+}
+
+.coin-value {
+    font-size: 11px;
+    color: #999;
+}
+
+.price {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.inr {
+    font-size: 11px;
+    color: #999;
+    font-weight: normal;
+}
+
+.change {
+    text-align: right;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.change.positive {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.change.negative {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 480px;
+    width: 100%;
+    background: #fff;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: #999;
+    cursor: pointer;
+}
+
+.nav-item span:first-child {
+    font-size: 20px;
+}
+
+.home-btn {
+    background: #1e40af;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.page-header h2 {
+    font-size: 18px;
+    flex: 1;
+    text-align: center;
+}
+
+.deposit-link {
+    font-size: 13px;
+    color: #1e40af;
+    text-decoration: none;
+}
+
+.coin-selector {
+    padding: 20px;
+}
+
+.coin-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #f0f0f0;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+}
+
+.coin-icon {
+    font-size: 18px;
+}
+
+.form-section {
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.form-section label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.form-section input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    background: #f9f9f9;
+}
+
+.limit-text {
+    font-size: 12px;
+    color: #ff6b00;
+    margin-top: 8px;
+}
+
+.price-info {
+    font-size: 13px;
+    color: #333;
+    margin-top: 8px;
+}
+
+.payment-select {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.confirm-btn {
+    width: calc(100% - 40px);
+    margin: 20px;
+    padding: 15px;
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.info-section {
+    padding: 20px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.info-section p {
+    margin-bottom: 10px;
+}
+
+.team-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+.stat-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: bold;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #666;
+}
+
+.team-earnings {
+    padding: 20px;
+}
+
+.earnings-card {
+    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    padding: 25px;
+    border-radius: 12px;
+    color: white;
+}
+
+.earnings-label {
+    font-size: 13px;
+    opacity: 0.9;
+    margin-bottom: 8px;
+}
+
+.earnings-value {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.team-list {
+    padding: 20px;
+}
+
+.list-header h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: 15px;
+}
+
+.empty-state p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.empty-hint {
+    font-size: 12px;
+    color: #999;
+}
+
+.vip-page {
+    background: #1a1a1a;
+    color: #fff;
+}
+
+.vip-header {
+    padding: 15px 20px;
+    background: #000;
+}
+
+.back-btn-white {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.vip-intro {
+    padding: 40px 20px;
+}
+
+.vip-intro h1 {
+    font-size: 28px;
+    line-height: 1.4;
+}
+
+.vip-highlight {
+    color: #3b82f6;
+}
+
+.vip-current {
+    background: #2a2a2a;
+    padding: 20px;
+    margin: 0 20px 20px;
+    border-radius: 8px;
+}
+
+.vip-current h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.progress-item {
+    font-size: 13px;
+    color: #999;
+    padding: 8px 0;
+}
+
+.vip-table-section {
+    padding: 20px;
+}
+
+.vip-table-section h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.vip-table {
+    width: 100%;
+    background: #2a2a2a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.vip-table th {
+    background: #333;
+    padding: 12px 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.vip-table td {
+    padding: 15px 8px;
+    text-align: center;
+    font-size: 13px;
+    border-top: 1px solid #333;
+}
+
+.invitations-section {
+    padding: 20px;
+}
+
+.invitations-section h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.invitation-row {
+    background: #2a2a2a;
+    padding: 15px 20px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.invite-hero {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.gift-illustration {
+    font-size: 120px;
+    margin-bottom: 20px;
+}
+
+.invite-hero h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.invite-subtitle {
+    font-size: 14px;
+    color: #999;
+}
+
+.invite-codes {
+    padding: 20px;
+    background: #f9f9f9;
+    margin: 20px;
+    border-radius: 12px;
+}
+
+.code-row {
+    margin-bottom: 20px;
+}
+
+.code-row:last-child {
+    margin-bottom: 0;
+}
+
+.code-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #666;
+}
+
+.code-value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.code-value span {
+    flex: 1;
+    font-size: 13px;
+    word-break: break-all;
+}
+
+.copy-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.refer-btn {
+    width: calc(100% - 40px);
+    margin: 20px;
+    padding: 15px;
+    background: #0a1628;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.invite-info {
+    padding: 20px;
+    font-size: 11px;
+    color: #999;
+    line-height: 1.6;
+}
+
+.invite-info p {
+    margin-bottom: 10px;
+}
+
+.commission-records {
+    font-size: 13px;
+    color: #1e40af;
+    text-decoration: none;
+}
+
+.commission-intro {
+    padding: 30px 20px;
+    position: relative;
+}
+
+.commission-intro h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.commission-intro p {
+    font-size: 13px;
+    color: #666;
+}
+
+.highlight-text {
+    color: #1e40af;
+    font-weight: 600;
+}
+
+.commission-illustration {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    font-size: 80px;
+}
+
+.commission-earned {
+    padding: 20px;
+    background: #f9f9f9;
+    margin: 0 20px 20px;
+    border-radius: 12px;
+}
+
+.earned-label {
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+.earned-amount {
+    font-size: 36px;
+    font-weight: bold;
+    color: #1e40af;
+    margin-bottom: 15px;
+}
+
+.earned-unit {
+    font-size: 16px;
+    color: #666;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #1e40af;
+    transition: width 0.3s;
+}
+
+.tasks-section {
+    padding: 0 20px 20px;
+}
+
+.task-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.task-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.task-number {
+    width: 24px;
+    height: 24px;
+    background: #1e40af;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.task-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.task-progress {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.task-icon {
+    font-size: 32px;
+}
+
+.task-bar {
+    flex: 1;
+    height: 24px;
+    background: #f0f0f0;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+.task-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6 0%, #60a5fa 100%);
+    transition: width 0.3s;
+}
+
+.task-bar-text {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    color: #666;
+}
+
+.claim-btn {
+    width: calc(100% - 40px);
+    margin: 20px;
+    padding: 15px;
+    background: #9ca3af;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.commission-info {
+    padding: 20px;
+    font-size: 11px;
+    color: #999;
+    line-height: 1.6;
+}
+
+.commission-info p {
+    margin-bottom: 10px;
+}
+
+.personal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.personal-header h2 {
+    font-size: 18px;
+}
+
+.profile-section {
+    padding: 20px;
+}
+
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 12px;
+}
+
+.profile-avatar {
+    width: 50px;
+    height: 50px;
+    background: #1e40af;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-info h3 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.profile-info p {
+    font-size: 13px;
+    color: #999;
+}
+
+.profile-badge {
+    font-size: 24px;
+}
+
+.invite-banner {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 20px;
+    margin: 0 20px 20px;
+    background: #f0f9ff;
+    border-radius: 12px;
+}
+
+.invite-icon {
+    font-size: 32px;
+}
+
+.invite-text strong {
+    display: block;
+    font-size: 14px;
+    color: #1e40af;
+    margin-bottom: 3px;
+}
+
+.invite-text p {
+    font-size: 12px;
+    color: #666;
+}
+
+.menu-section {
+    padding: 20px;
+}
+
+.menu-section h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.menu-icon {
+    width: 50px;
+    height: 50px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.menu-item span {
+    font-size: 11px;
+    text-align: center;
+    color: #333;
+}
+
+.nav-item.active {
+    color: #1e40af;
+}
+
+.market-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.market-header h2 {
+    font-size: 18px;
+}
+
+.live-prices {
+    padding: 20px;
+}
+
+.live-prices h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.price-cards {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+}
+
+.price-card {
+    min-width: 120px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 15px;
+}
+
+.coin-badge {
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.mini-chart {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.price-change {
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.price-change.positive {
+    color: #059669;
+}
+
+.price-change.negative {
+    color: #dc2626;
+}
+
+.price-value {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.market-list {
+    padding: 20px;
+}
+
+.list-header {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+    padding: 10px 0;
+    font-size: 12px;
+    color: #999;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.market-item {
+    display: grid;
+    grid-template-columns: 2fr 1.5fr 1fr;
+    padding: 15px 0;
+    align-items: center;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.coin-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.coin-icon {
+    font-size: 20px;
+}
+
+.market-cap {
+    font-size: 11px;
+    color: #999;
+    margin-top: 3px;
+}
+
+.price-col {
+    text-align: right;
+}
+
+.price {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.price-inr {
+    font-size: 11px;
+    color: #999;
+    margin-top: 2px;
+}
+
+.change-badge {
+    text-align: right;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.change-badge.positive {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.change-badge.negative {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.property-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.property-header h2 {
+    font-size: 18px;
+}
+
+.total-assets {
+    background: #0a1628;
+    color: white;
+    padding: 40px 20px;
+    margin: 20px;
+    border-radius: 12px;
+}
+
+.assets-label {
+    font-size: 13px;
+    opacity: 0.8;
+    margin-bottom: 10px;
+}
+
+.assets-amount {
+    font-size: 48px;
+    font-weight: 300;
+    margin: 10px 0;
+}
+
+.assets-inr {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.roll-buttons {
+    display: flex;
+    gap: 15px;
+    padding: 0 20px 20px;
+}
+
+.roll-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.roll-btn span:first-child {
+    font-size: 18px;
+}
+
+.property-list {
+    padding: 20px;
+}
+
+.property-list h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.asset-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.asset-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.asset-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: #999;
+}
+
+.deposit-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.deposit-header h2 {
+    font-size: 18px;
+    flex: 1;
+    text-align: center;
+}
+
+.network-section {
+    padding: 20px;
+}
+
+.network-label {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.qr-section {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.qr-code {
+    width: 200px;
+    height: 200px;
+    background: #fff;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.qr-placeholder {
+    font-size: 80px;
+}
+
+.address-section {
+    padding: 20px;
+}
+
+.address-section label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.address-box {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    word-break: break-all;
+    font-size: 13px;
+}
+
+.copy-address-btn {
+    width: calc(100% - 40px);
+    margin: 0 20px 20px;
+    padding: 15px;
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.deposit-info {
+    padding: 20px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.deposit-info p {
+    margin-bottom: 12px;
+}
+
+.withdraw-records {
+    font-size: 13px;
+    color: #1e40af;
+    text-decoration: none;
+}
+
+.select-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.dropdown {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 5px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.dropdown-item {
+    padding: 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: #f9f9f9;
+}
+
+.currency-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: #f0f0f0;
+    border-radius: 20px;
+}
+
+.currency-icon {
+    font-size: 18px;
+}
+
+.net-box {
+    padding: 12px;
+    background: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.fee-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #666;
+    margin-top: 8px;
+}
+
+.available {
+    color: #ff6b00;
+}
+
+.range-info {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+}
+
+.submit-btn {
+    width: calc(100% - 40px);
+    margin: 20px;
+    padding: 15px;
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.withdraw-info {
+    padding: 20px;
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+}
+
+.withdraw-info p {
+    margin-bottom: 10px;
+}
+
+.security-page {
+    background: #f5f5f5;
+}
+
+.security-section {
+    padding: 20px;
+}
+
+.security-section h3 {
+    font-size: 14px;
+    margin-bottom: 15px;
+    color: #666;
+}
+
+.security-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.security-icon {
+    font-size: 28px;
+}
+
+.security-info {
+    flex: 1;
+}
+
+.security-info strong {
+    font-size: 14px;
+}
+
+.security-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.security-grid .security-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.security-grid .arrow {
+    align-self: flex-end;
+}
+
+.earnings-records {
+    font-size: 13px;
+    color: #1e40af;
+    text-decoration: none;
+}
+
+.balance-card {
+    background: #0a1628;
+    color: white;
+    padding: 30px 20px;
+    margin: 20px;
+    border-radius: 12px;
+}
+
+.balance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.details-btn {
+    background: rgba(255,255,255,0.2);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.balance-value {
+    font-size: 48px;
+    font-weight: 300;
+    margin: 10px 0;
+}
+
+.profit-rate {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.products-section {
+    padding: 20px;
+}
+
+.products-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.products-header h3 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.purchase-records {
+    font-size: 13px;
+    color: #1e40af;
+    text-decoration: none;
+}
+
+.product-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.product-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.product-icon {
+    font-size: 24px;
+}
+
+.product-header strong {
+    flex: 1;
+    font-size: 15px;
+}
+
+.buy-btn {
+    background: #000;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.product-details {
+    padding-left: 34px;
+}
+
+.yield-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.yield-label {
+    font-size: 12px;
+    color: #999;
+}
+
+.yield-value {
+    font-size: 20px;
+    font-weight: bold;
+    color: #059669;
+}
+
+.product-meta {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.product-meta p {
+    margin-bottom: 3px;
+}
+
+.remaining-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+}
+
+.remaining-value {
+    font-weight: bold;
+    color: #1e40af;
+}
+
+.total {
+    color: #999;
+    font-weight: normal;
+}
+
+.mining-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #0a1628;
+    color: white;
+}
+
+.purchase-record {
+    font-size: 13px;
+    color: white;
+    text-decoration: none;
+}
+
+.mining-hero {
+    background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.mining-hero h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.mining-hero p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.mining-list {
+    padding: 20px;
+}
+
+.mining-card {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.mining-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.machine-icon {
+    font-size: 32px;
+}
+
+.machine-info {
+    flex: 1;
+}
+
+.machine-info strong {
+    font-size: 15px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.machine-period {
+    font-size: 12px;
+    color: #666;
+}
+
+.mining-details {
+    padding-left: 44px;
+}
+
+.income-label {
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.income-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #059669;
+    margin-bottom: 10px;
+}
+
+.mining-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #666;
+}
+
+.price {
+    color: #dc2626;
+}
+
+.remaining {
+    color: #666;
+}
+
+.auth-section {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 40px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.auth-section h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.auth-section p {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.auth-form input {
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.auth-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.auth-link a {
+    color: #1e40af;
+    text-decoration: none;
+}

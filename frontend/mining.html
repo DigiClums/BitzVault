@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mining Machine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="mining-header">
+            <button class="back-btn-white" onclick="history.back()">← MINING MACHINE</button>
+            <a href="#" onclick="showMyMachines()" class="purchase-record">My Machines</a>
+        </header>
+
+        <section class="mining-hero">
+            <h2>Super strong computing power</h2>
+            <p>Annual return rate of up to 50%</p>
+        </section>
+
+        <section class="mining-list">
+            <div class="mining-card">
+                <div class="mining-header">
+                    <div class="machine-icon">⚙️</div>
+                    <div class="machine-info">
+                        <strong>WhatsMiner M60 - M60S</strong>
+                        <p class="machine-period">Income Period: 1 Years</p>
+                    </div>
+                    <button class="buy-btn" onclick="buyMachine('WhatsMiner M60 - M60S', 432, 1555, 365)">Buy</button>
+                </div>
+                <div class="mining-details">
+                    <p class="income-label">Period Income (USDT)</p>
+                    <h3 class="income-value">1555.00</h3>
+                    <div class="mining-meta">
+                        <span class="price">Price: 432</span>
+                        <span class="remaining">Remaining: 727653/2000000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mining-card">
+                <div class="mining-header">
+                    <div class="machine-icon">⚙️</div>
+                    <div class="machine-info">
+                        <strong>Miner-20 - Antminer S21</strong>
+                        <p class="machine-period">Income Period: 365 Days</p>
+                    </div>
+                    <button class="buy-btn" onclick="buyMachine('Miner-20 - Antminer S21', 3900, 13.50, 365)">Buy</button>
+                </div>
+                <div class="mining-details">
+                    <p class="income-label">Period Income (USDT)</p>
+                    <h3 class="income-value">13.50</h3>
+                    <div class="mining-meta">
+                        <span class="price">Price: 3900</span>
+                        <span class="remaining">Remaining: 0/160000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mining-card">
+                <div class="mining-header">
+                    <div class="machine-icon">⚙️</div>
+                    <div class="machine-info">
+                        <strong>Miner-18 - WhatsMiner M33S++</strong>
+                        <p class="machine-period">Income Period: 365 Days</p>
+                    </div>
+                    <button class="buy-btn" onclick="buyMachine('Miner-18 - WhatsMiner M33S++', 2950, 12.00, 365)">Buy</button>
+                </div>
+                <div class="mining-details">
+                    <p class="income-label">Period Income (USDT)</p>
+                    <h3 class="income-value">12.00</h3>
+                    <div class="mining-meta">
+                        <span class="price">Price: 2950</span>
+                        <span class="remaining">Remaining: 60139/360000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mining-card">
+                <div class="mining-header">
+                    <div class="machine-icon">⚙️</div>
+                    <div class="machine-info">
+                        <strong>WhatsMiner - M56S++</strong>
+                        <p class="machine-period">Income Period: 330 Days</p>
+                    </div>
+                    <button class="buy-btn" onclick="buyMachine('WhatsMiner - M56S++', 3000, 12.50, 330)">Buy</button>
+                </div>
+                <div class="mining-details">
+                    <p class="income-label">Period Income (USDT)</p>
+                    <h3 class="income-value">12.50</h3>
+                    <div class="mining-meta">
+                        <span class="price">Price: 3000</span>
+                        <span class="remaining">Remaining: 340697/360000</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mining-card">
+                <div class="mining-header">
+                    <div class="machine-icon">⚙️</div>
+                    <div class="machine-info">
+                        <strong>WhatsMiner - M30S</strong>
+                        <p class="machine-period">Income Period: 300 Days</p>
+                    </div>
+                    <button class="buy-btn" onclick="buyMachine('WhatsMiner - M30S', 2800, 11.00, 300)">Buy</button>
+                </div>
+                <div class="mining-details">
+                    <p class="income-label">Period Income (USDT)</p>
+                    <h3 class="income-value">11.00</h3>
+                    <div class="mining-meta">
+                        <span class="price">Price: 2800</span>
+                        <span class="remaining">Remaining: 340000/360000</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div id="myMachinesModal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.8); z-index:1000; overflow:auto;">
+            <div style="background:white; margin:50px auto; padding:20px; max-width:600px; border-radius:10px;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
+                    <h2>My Mining Machines</h2>
+                    <button onclick="closeModal()" style="font-size:24px; border:none; background:none; cursor:pointer;">×</button>
+                </div>
+                <div id="machinesList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script>
+        async function buyMachine(name, price, income, period) {
+            if (!confirm(`Buy ${name} for ${price} USDT?`)) return;
+            try {
+                await api.purchaseMining(name, price, income, period);
+                alert('Mining machine purchased successfully!');
+            } catch (err) {
+                alert(err.message || 'Purchase failed');
+            }
+        }
+
+        async function showMyMachines() {
+            try {
+                const machines = await api.getMining();
+                const modal = document.getElementById('myMachinesModal');
+                const list = document.getElementById('machinesList');
+                
+                if (machines.length === 0) {
+                    list.innerHTML = '<p style="text-align:center; padding:20px;">No machines purchased yet</p>';
+                } else {
+                    list.innerHTML = machines.map(m => `
+                        <div style="border:1px solid #ddd; padding:15px; margin-bottom:10px; border-radius:5px;">
+                            <strong>${m.machineName}</strong>
+                            <p>Price: ${m.price} USDT | Income: ${m.periodIncome} USDT</p>
+                            <p>Period: ${m.period} days</p>
+                            <p>Start: ${new Date(m.startDate).toLocaleDateString()}</p>
+                        </div>
+                    `).join('');
+                }
+                modal.style.display = 'block';
+            } catch (err) {
+                alert('Failed to load machines');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('myMachinesModal').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

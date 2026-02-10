@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="personal-header">
+            <h2>Personal</h2>
+        </header>
+
+        <section class="profile-section">
+            <div class="profile-card">
+                <div class="profile-avatar">👤</div>
+                <div class="profile-info">
+                    <h3 id="userId">Loading...</h3>
+                    <p id="userPhone">***</p>
+                </div>
+                <div class="profile-badge">🛡️</div>
+            </div>
+        </section>
+
+        <section class="invite-banner">
+            <div class="invite-icon">📢</div>
+            <div class="invite-text">
+                <strong>Invite Friends</strong>
+                <p>Invite friends to earn generous rewards</p>
+            </div>
+        </section>
+
+        <section class="menu-section">
+            <h3>Recommend</h3>
+            <div class="menu-grid">
+                <div class="menu-item" onclick="window.location.href='recharge.html'">
+                    <div class="menu-icon">💳</div>
+                    <span>Recharge</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='withdraw.html'">
+                    <div class="menu-icon">🎯</div>
+                    <span>Withdraw</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='invite.html'">
+                    <div class="menu-icon">💎</div>
+                    <span>Invite</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='commission.html'">
+                    <div class="menu-icon">👥</div>
+                    <span>Commission</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-section">
+            <h3>Common functions</h3>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-icon">🛠️</div>
+                    <span>Online Service</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='mining.html'">
+                    <div class="menu-icon">⚙️</div>
+                    <span>Mining</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='money.html'">
+                    <div class="menu-icon">💰</div>
+                    <span>Manage Money</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='team.html'">
+                    <div class="menu-icon">👥</div>
+                    <span>Team</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">💱</div>
+                    <span>New Currency Subscription</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">📊</div>
+                    <span>OTC</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">🏢</div>
+                    <span>Community</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='vip.html'">
+                    <div class="menu-icon">🎁</div>
+                    <span>VIP Rewards</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">🎲</div>
+                    <span>ID Rewards</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">🎰</div>
+                    <span>Raffle</span>
+                </div>
+                <div class="menu-item" onclick="window.location.href='security.html'">
+                    <div class="menu-icon">🔒</div>
+                    <span>Security Center</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">📍</div>
+                    <span>Wallet Address</span>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-icon">❓</div>
+                    <span>Help</span>
+                </div>
+                <div class="menu-item" onclick="logout()">
+                    <div class="menu-icon">🚪</div>
+                    <span>Log Out</span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="bottom-nav">
+            <div class="nav-item active">
+                <span>👤</span>
+                <span>PERSONAL</span>
+            </div>
+            <div class="nav-item">
+                <span>📊</span>
+                <span>MARKET</span>
+            </div>
+            <div class="nav-item" onclick="window.location.href='index.html'">
+                <div class="home-btn">🏠</div>
+            </div>
+            <div class="nav-item">
+                <span>💱</span>
+                <span>TRADE</span>
+            </div>
+            <div class="nav-item">
+                <span>🏢</span>
+                <span>PROPERTY</span>
+            </div>
+        </nav>
+    </div>
+    <script src="auth.js"></script>
+    <script src="api.js"></script>
+    <script>
+        async function loadProfile() {
+            try {
+                const profile = await api.getProfile();
+                document.getElementById('userId').textContent = profile.userId;
+                const phone = profile.phone;
+                document.getElementById('userPhone').textContent = phone.substring(0, 3) + '****' + phone.substring(phone.length - 3);
+            } catch (err) {
+                console.error('Failed to load profile:', err);
+            }
+        }
+        loadProfile();
+    </script>
+</body>
+</html>
