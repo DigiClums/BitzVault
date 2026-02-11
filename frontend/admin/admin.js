@@ -1,6 +1,6 @@
 const API_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:3001/api'
-    : '/api';
+    : 'https://bitzvault.onrender.com/api';
 
 function setStatus(message, isError = false) {
     const statusEl = document.getElementById('adminStatus');
