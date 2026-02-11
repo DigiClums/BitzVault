@@ -19,18 +19,31 @@
     </div>
 
     <script>
-        document.getElementById('adminLoginForm').addEventListener('submit', (e) => {
+        const API_URL = window.location.hostname === 'localhost'
+            ? 'http://localhost:3001/api'
+            : 'https://bitzvault.onrender.com/api';
+
+        document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            
-            if (username === 'admin' && password === 'admin123') {
-                const expiresAt = Date.now() + 8 * 60 * 60 * 1000;
-                localStorage.setItem('adminToken', 'admin-authenticated');
-                localStorage.setItem('adminTokenExpiresAt', String(expiresAt));
+
+            try {
+                const res = await fetch(`${API_URL}/admin/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+
+                if (!res.ok) {
+                    throw new Error(data.message || 'Login failed');
+                }
+
+                localStorage.setItem('adminToken', data.token);
                 window.location.href = 'dashboard.html';
-            } else {
-                alert('Invalid credentials');
+            } catch (err) {
+                alert(err.message || 'Login failed');
             }
         });
     </script>

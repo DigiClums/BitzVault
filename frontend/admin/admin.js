@@ -17,8 +17,18 @@ function clearStatus() {
 }
 
 async function request(path, options = {}) {
-    const response = await fetch(`${API_URL}${path}`, options);
+    const token = localStorage.getItem('adminToken');
+    const headers = {
+        ...(options.headers || {}),
+        ...(token ? { Authorization: `Bearer ${token}` } : {})
+    };
+    const response = await fetch(`${API_URL}${path}`, { ...options, headers });
     const data = await response.json().catch(() => ({}));
+    if (response.status === 401 || response.status === 403) {
+        localStorage.removeItem('adminToken');
+        window.location.href = 'login.html';
+        throw new Error('Session expired. Please login again.');
+    }
     if (!response.ok) {
         throw new Error(data.message || 'Request failed');
     }
