@@ -28,10 +28,6 @@ router.post('/login', async (req, res) => {
   }
 });
 
-router.get('/health', (req, res) => {
-  return res.json({ ok: true, service: 'admin', version: 'auth-protected-routes' });
-});
-
 router.use((req, res, next) => {
   try {
     const token = req.header('Authorization')?.replace('Bearer ', '');
