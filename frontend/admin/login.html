@@ -25,9 +25,7 @@
             const password = document.getElementById('password').value;
             
             if (username === 'admin' && password === 'admin123') {
-                const expiresAt = Date.now() + 8 * 60 * 60 * 1000;
                 localStorage.setItem('adminToken', 'admin-authenticated');
-                localStorage.setItem('adminTokenExpiresAt', String(expiresAt));
                 window.location.href = 'dashboard.html';
             } else {
                 alert('Invalid credentials');

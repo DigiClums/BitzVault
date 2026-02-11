@@ -11,17 +11,16 @@
         <aside class="sidebar">
             <h2>Admin Panel</h2>
             <nav>
-                <a href="#" onclick="showSection(event, 'dashboard')" class="active">Dashboard</a>
-                <a href="#" onclick="showSection(event, 'users')">Users</a>
-                <a href="#" onclick="showSection(event, 'transactions')">Transactions</a>
-                <a href="#" onclick="showSection(event, 'mining')">Mining</a>
-                <a href="#" onclick="showSection(event, 'settings')">Settings</a>
+                <a href="#" onclick="showSection('dashboard')" class="active">📊 Dashboard</a>
+                <a href="#" onclick="showSection('users')">👥 Users</a>
+                <a href="#" onclick="showSection('transactions')">💰 Transactions</a>
+                <a href="#" onclick="showSection('mining')">⚙️ Mining</a>
+                <a href="#" onclick="showSection('settings')">⚙️ Settings</a>
                 <a href="#" onclick="logout()">🚪 Logout</a>
             </nav>
         </aside>
 
         <main class="content">
-            <div id="adminStatus" class="status-banner" style="display:none;"></div>
             <div id="dashboard" class="section active">
                 <h1>Dashboard</h1>
                 <div class="stats-grid">
