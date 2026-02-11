@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
 
-router.post('/signup', async (req, res) => {
+const registerHandler = async (req, res) => {
   try {
     const { phone, password, inviteCode } = req.body;
     
@@ -32,7 +32,10 @@ router.post('/signup', async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
-});
+};
+
+router.post('/signup', registerHandler);
+router.post('/register', registerHandler);
 
 router.post('/login', async (req, res) => {
   try {
