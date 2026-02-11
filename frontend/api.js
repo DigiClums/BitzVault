@@ -1,4 +1,5 @@
-const API_URL = 'https://bitzvault.onrender.com';
+const API_URL = 'https://bitzvault.onrender.com/api';
+
 
 // const API_URL = 'http://localhost:3001/api';
 
