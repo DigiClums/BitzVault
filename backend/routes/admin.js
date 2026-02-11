@@ -1,51 +1,9 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Transaction = require('../models/Transaction');
 const Mining = require('../models/Mining');
 const Investment = require('../models/Investment');
 const router = express.Router();
-
-router.post('/login', async (req, res) => {
-  try {
-    const { username, password } = req.body;
-    const adminUsername = process.env.ADMIN_USERNAME || 'admin';
-    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123';
-
-    if (username !== adminUsername || password !== adminPassword) {
-      return res.status(401).json({ message: 'Invalid admin credentials' });
-    }
-
-    const token = jwt.sign(
-      { role: 'admin', username: adminUsername },
-      process.env.JWT_SECRET,
-      { expiresIn: '8h' }
-    );
-
-    return res.json({ token });
-  } catch (err) {
-    return res.status(500).json({ message: 'Server error' });
-  }
-});
-
-router.use((req, res, next) => {
-  try {
-    const token = req.header('Authorization')?.replace('Bearer ', '');
-    if (!token) {
-      return res.status(401).json({ message: 'Admin token required' });
-    }
-
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    if (decoded.role !== 'admin') {
-      return res.status(403).json({ message: 'Admin access denied' });
-    }
-
-    req.admin = decoded;
-    return next();
-  } catch (err) {
-    return res.status(401).json({ message: 'Invalid or expired admin token' });
-  }
-});
 
 router.get('/stats', async (req, res) => {
   try {
