@@ -9,22 +9,28 @@ purchaseInput?.addEventListener('input', (e) => {
 });
 
 function selectPayment() {
-    alert('Payment method selection');
+    Toast.info('Payment method selection coming soon');
 }
 
 function confirmPurchase() {
     const amount = purchaseInput.value;
     const name = document.getElementById('transferorName').value;
+    const btn = event.target;
     
     if (!amount || amount < 10000) {
-        alert('Minimum amount is ₹10,000');
+        Toast.error('Minimum amount is ₹10,000');
         return;
     }
     
     if (!name) {
-        alert('Please enter transferor name');
+        Toast.error('Please enter transferor name');
         return;
     }
     
-    alert('Purchase confirmed!');
+    setButtonLoading(btn, true);
+    
+    setTimeout(() => {
+        Toast.success('Purchase confirmed!');
+        setButtonLoading(btn, false);
+    }, 1500);
 }

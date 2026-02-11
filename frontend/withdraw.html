@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Withdraw Coins</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="enhanced.css">
 </head>
 <body>
     <div class="container">
@@ -47,16 +48,19 @@
         </section>
     </div>
 
+    <script src="ui-utils.js"></script>
     <script src="auth.js"></script>
     <script src="api.js"></script>
     <script src="withdraw.js"></script>
     <script>
         async function loadBalance() {
+            const balanceEl = document.getElementById('availableBalance');
             try {
                 const data = await api.getBalance();
-                document.getElementById('availableBalance').textContent = data.balance.toFixed(2);
+                animateNumber(balanceEl, 0, data.balance, 800);
             } catch (err) {
                 console.error('Failed to load balance:', err);
+                Toast.error('Failed to load balance');
             }
         }
         loadBalance();

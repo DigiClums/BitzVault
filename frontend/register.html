@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register - NovaBit IN</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="enhanced.css">
 </head>
 <body>
     <div class="container">
@@ -23,6 +24,7 @@
         </section>
     </div>
 
+    <script src="ui-utils.js"></script>
     <script src="api.js"></script>
     <script>
         document.getElementById('registerForm').addEventListener('submit', async (e) => {
@@ -30,14 +32,32 @@
             const phone = document.getElementById('phone').value;
             const password = document.getElementById('password').value;
             const inviteCode = document.getElementById('inviteCode').value;
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            
+            // Validation
+            if (!phone || phone.length < 10) {
+                Toast.error('Please enter a valid phone number');
+                return;
+            }
+            
+            if (!password || password.length < 6) {
+                Toast.error('Password must be at least 6 characters');
+                return;
+            }
+            
+            setButtonLoading(submitBtn, true);
             
             try {
                 const result = await api.register(phone, password, inviteCode);
                 localStorage.setItem('token', result.token);
                 localStorage.setItem('userId', result.userId);
-                window.location.href = 'index.html';
+                Toast.success('Registration successful! Redirecting...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
             } catch (err) {
-                alert(err.message || 'Registration failed');
+                Toast.error(err.message || 'Registration failed');
+                setButtonLoading(submitBtn, false);
             }
         });
     </script>

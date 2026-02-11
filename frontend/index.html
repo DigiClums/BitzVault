@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NovaBit IN</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="enhanced.css">
 </head>
 <body>
     <div class="container">
@@ -137,17 +138,22 @@
         </nav>
     </div>
 
+    <script src="ui-utils.js"></script>
     <script src="auth.js"></script>
     <script src="api.js"></script>
     <script src="script.js"></script>
     <script>
         async function loadBalance() {
+            const balanceEl = document.getElementById('balance');
+            const balanceInrEl = document.getElementById('balanceInr');
+            
             try {
                 const data = await api.getBalance();
-                document.getElementById('balance').textContent = data.balance.toFixed(2);
-                document.getElementById('balanceInr').textContent = (data.balance * 83.5).toFixed(2);
+                animateNumber(balanceEl, 0, data.balance, 800);
+                animateNumber(balanceInrEl, 0, data.balance * 83.5, 800);
             } catch (err) {
                 console.error('Failed to load balance:', err);
+                Toast.error('Failed to load balance');
             }
         }
         loadBalance();

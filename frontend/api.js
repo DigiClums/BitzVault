@@ -1,8 +1,8 @@
-const API_URL = 'https://bitz-vault-2j2zul8v0-digiclums-projects.vercel.app/api';
+const API_URL = 'http://localhost:3001/api';
 
 const api = {
   async register(phone, password, inviteCode) {
-    const res = await fetch(`${API_URL}/auth/register`, {
+    const res = await fetch(`${API_URL}/auth/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ phone, password, inviteCode })
@@ -13,7 +13,7 @@ const api = {
   },
 
   async login(phone, password) {
-    const res = await fetch(`${API_URL}/auth/login`, {
+    const res = await fetch(`${API_URL}/auth/signin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ phone, password })

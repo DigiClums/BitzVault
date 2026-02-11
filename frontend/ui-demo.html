@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UI/UX Demo - BitzVault</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="enhanced.css">
+    <style>
+        .demo-section {
+            padding: 30px 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .demo-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #1e40af;
+        }
+        .demo-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .demo-btn {
+            padding: 10px 20px;
+            background: #1e40af;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .demo-btn.secondary {
+            background: #6b7280;
+        }
+        .demo-btn.success {
+            background: #10b981;
+        }
+        .demo-btn.danger {
+            background: #ef4444;
+        }
+        .demo-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .demo-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .animation-box {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="page-header">
+            <button class="back-btn" onclick="window.location.href='index.html'">←</button>
+            <h2>UI/UX Demo</h2>
+            <span></span>
+        </header>
+
+        <!-- Toast Notifications -->
+        <section class="demo-section">
+            <h3>🔔 Toast Notifications</h3>
+            <div class="demo-buttons">
+                <button class="demo-btn success" onclick="Toast.success('Operation completed successfully!')">Success</button>
+                <button class="demo-btn danger" onclick="Toast.error('Something went wrong!')">Error</button>
+                <button class="demo-btn secondary" onclick="Toast.warning('Please check your input')">Warning</button>
+                <button class="demo-btn" onclick="Toast.info('This is an information message')">Info</button>
+            </div>
+            <p style="font-size: 13px; color: #666;">Click buttons to see different toast notifications</p>
+        </section>
+
+        <!-- Loading States -->
+        <section class="demo-section">
+            <h3>⏳ Loading Animations</h3>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="showLoadingDemo()">Full Screen Loader</button>
+                <button class="demo-btn" id="btnLoadingDemo" onclick="buttonLoadingDemo(this)">Button Loading</button>
+            </div>
+            <div class="loader" style="margin: 20px auto;"></div>
+            <p style="font-size: 13px; color: #666; text-align: center;">Spinner animation</p>
+        </section>
+
+        <!-- Animated Numbers -->
+        <section class="demo-section">
+            <h3>🔢 Animated Number Counter</h3>
+            <div class="demo-card">
+                <div style="text-align: center;">
+                    <p style="font-size: 14px; color: #666; margin-bottom: 10px;">Balance</p>
+                    <h2 id="animatedBalance" style="font-size: 42px; color: #1e40af;">0.00</h2>
+                    <p style="font-size: 13px; color: #999;">USDT</p>
+                </div>
+            </div>
+            <button class="demo-btn" onclick="animateBalanceDemo()">Animate to 1,234.56</button>
+        </section>
+
+        <!-- Form Validation -->
+        <section class="demo-section">
+            <h3>✅ Form Validation</h3>
+            <div class="demo-card">
+                <input type="email" class="demo-input" id="emailInput" placeholder="Enter email">
+                <input type="password" class="demo-input" id="passwordInput" placeholder="Enter password (min 6 chars)">
+                <button class="demo-btn" onclick="validateFormDemo()">Validate</button>
+            </div>
+        </section>
+
+        <!-- Copy to Clipboard -->
+        <section class="demo-section">
+            <h3>📋 Copy to Clipboard</h3>
+            <div class="demo-card">
+                <p style="font-size: 14px; margin-bottom: 10px;">Wallet Address:</p>
+                <div style="background: #f5f5f5; padding: 12px; border-radius: 8px; word-break: break-all; margin-bottom: 10px;">
+                    TMAJhaEGVcYLCzn99qro6hMjjukR4AGJUQ
+                </div>
+                <button class="demo-btn" onclick="copyToClipboard('TMAJhaEGVcYLCzn99qro6hMjjukR4AGJUQ')">Copy Address</button>
+            </div>
+        </section>
+
+        <!-- Modal System -->
+        <section class="demo-section">
+            <h3>💬 Modal Dialogs</h3>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="showModalDemo()">Show Modal</button>
+                <button class="demo-btn secondary" onclick="showConfirmDemo()">Confirm Dialog</button>
+            </div>
+        </section>
+
+        <!-- Animations -->
+        <section class="demo-section">
+            <h3>✨ CSS Animations</h3>
+            <div class="demo-buttons">
+                <button class="demo-btn" onclick="animateBox('fade-in')">Fade In</button>
+                <button class="demo-btn" onclick="animateBox('pulse')">Pulse</button>
+                <button class="demo-btn" onclick="animateBox('bounce')">Bounce</button>
+                <button class="demo-btn" onclick="animateBox('flip-in')">Flip In</button>
+            </div>
+            <div id="animationBox" class="animation-box"></div>
+        </section>
+
+        <!-- Skeleton Loading -->
+        <section class="demo-section">
+            <h3>💀 Skeleton Loading</h3>
+            <div class="demo-card">
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text" style="width: 60%;"></div>
+            </div>
+            <button class="demo-btn" onclick="loadContentDemo()">Load Content</button>
+        </section>
+
+        <!-- Hover Effects -->
+        <section class="demo-section">
+            <h3>🎨 Interactive Cards</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                <div class="action-card">
+                    <div class="action-icon">💰</div>
+                    <div class="action-text">
+                        <strong>Deposit</strong>
+                        <span>Add funds</span>
+                    </div>
+                </div>
+                <div class="action-card">
+                    <div class="action-icon">💸</div>
+                    <div class="action-text">
+                        <strong>Withdraw</strong>
+                        <span>Cash out</span>
+                    </div>
+                </div>
+                <div class="action-card">
+                    <div class="action-icon">📊</div>
+                    <div class="action-text">
+                        <strong>Trade</strong>
+                        <span>Buy & Sell</span>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size: 13px; color: #666; margin-top: 15px;">Hover or tap cards to see effects</p>
+        </section>
+
+        <!-- Progress Bars -->
+        <section class="demo-section">
+            <h3>📊 Progress Indicators</h3>
+            <div class="demo-card">
+                <p style="font-size: 14px; margin-bottom: 10px;">Task Progress</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressDemo" style="width: 0%;"></div>
+                </div>
+                <p style="font-size: 12px; color: #666; margin-top: 8px;">0% Complete</p>
+            </div>
+            <button class="demo-btn" onclick="animateProgressDemo()">Animate Progress</button>
+        </section>
+
+        <!-- Mobile Responsive -->
+        <section class="demo-section">
+            <h3>📱 Mobile Responsive</h3>
+            <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                This entire application is fully responsive. Try resizing your browser window or viewing on different devices.
+            </p>
+            <div style="background: #f0f9ff; padding: 15px; border-radius: 8px; font-size: 13px;">
+                <strong>Current viewport:</strong> <span id="viewportSize"></span><br>
+                <strong>Device type:</strong> <span id="deviceType"></span>
+            </div>
+        </section>
+
+        <div style="padding: 40px 20px; text-align: center;">
+            <button class="demo-btn" onclick="window.location.href='index.html'" style="padding: 15px 40px; font-size: 16px;">
+                Back to Home
+            </button>
+        </div>
+    </div>
+
+    <script src="ui-utils.js"></script>
+    <script>
+        // Loading Demo
+        function showLoadingDemo() {
+            Loading.show('Processing your request...');
+            setTimeout(() => {
+                Loading.hide();
+                Toast.success('Loading complete!');
+            }, 2000);
+        }
+
+        function buttonLoadingDemo(btn) {
+            setButtonLoading(btn, true);
+            setTimeout(() => {
+                setButtonLoading(btn, false);
+                Toast.success('Action completed!');
+            }, 2000);
+        }
+
+        // Animated Number Demo
+        function animateBalanceDemo() {
+            const el = document.getElementById('animatedBalance');
+            animateNumber(el, 0, 1234.56, 1500);
+        }
+
+        // Form Validation Demo
+        function validateFormDemo() {
+            const email = document.getElementById('emailInput');
+            const password = document.getElementById('passwordInput');
+            
+            const emailValid = email.value.includes('@');
+            const passwordValid = password.value.length >= 6;
+            
+            validateInput(email, emailValid, 'Please enter a valid email');
+            validateInput(password, passwordValid, 'Password must be at least 6 characters');
+            
+            if (emailValid && passwordValid) {
+                Toast.success('Form is valid!');
+            }
+        }
+
+        // Modal Demo
+        function showModalDemo() {
+            Modal.show(
+                'Welcome!',
+                'This is a custom modal dialog. You can display any content here.',
+                [
+                    { text: 'Got it!', onclick: 'Toast.success("Modal closed")', class: 'demo-btn' }
+                ]
+            );
+        }
+
+        function showConfirmDemo() {
+            Modal.confirm(
+                'Confirm Action',
+                'Are you sure you want to proceed?',
+                () => Toast.success('Action confirmed!')
+            );
+        }
+
+        // Animation Demo
+        function animateBox(animationClass) {
+            const box = document.getElementById('animationBox');
+            box.className = 'animation-box ' + animationClass;
+            setTimeout(() => {
+                box.className = 'animation-box';
+            }, 1000);
+        }
+
+        // Skeleton Loading Demo
+        function loadContentDemo() {
+            const card = event.target.previousElementSibling;
+            card.innerHTML = `
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+            `;
+            
+            setTimeout(() => {
+                card.innerHTML = `
+                    <h4 style="margin-bottom: 10px;">Content Loaded!</h4>
+                    <p style="font-size: 14px; color: #666;">
+                        This content was loaded after a simulated delay. 
+                        Skeleton loaders provide better perceived performance.
+                    </p>
+                `;
+                card.classList.add('fade-in');
+            }, 2000);
+        }
+
+        // Progress Demo
+        function animateProgressDemo() {
+            const progress = document.getElementById('progressDemo');
+            const text = progress.parentElement.nextElementSibling;
+            let width = 0;
+            
+            const interval = setInterval(() => {
+                width += 1;
+                progress.style.width = width + '%';
+                text.textContent = width + '% Complete';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    Toast.success('Task completed!');
+                }
+            }, 20);
+        }
+
+        // Viewport Info
+        function updateViewportInfo() {
+            const width = window.innerWidth;
+            document.getElementById('viewportSize').textContent = width + 'px';
+            
+            let deviceType = 'Desktop';
+            if (width < 480) deviceType = 'Mobile';
+            else if (width < 768) deviceType = 'Tablet';
+            
+            document.getElementById('deviceType').textContent = deviceType;
+        }
+
+        updateViewportInfo();
+        window.addEventListener('resize', updateViewportInfo);
+
+        // Initial animation
+        setTimeout(() => {
+            Toast.info('Welcome to the UI/UX Demo!');
+        }, 500);
+    </script>
+</body>
+</html>

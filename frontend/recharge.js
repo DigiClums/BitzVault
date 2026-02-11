@@ -1,23 +1,28 @@
 function copyAddress() {
     const address = document.getElementById('depositAddress').textContent;
-    navigator.clipboard.writeText(address);
-    alert('Address copied!');
+    copyToClipboard(address, 'Deposit address copied!');
 }
 
 async function confirmDeposit() {
     const amount = document.getElementById('depositAmount').value;
     const address = document.getElementById('depositAddress').textContent;
+    const btn = event.target;
     
     if (!amount || amount < 100) {
-        alert('Minimum deposit is 100 USDT');
+        Toast.error('Minimum deposit is 100 USDT');
         return;
     }
     
+    setButtonLoading(btn, true);
+    
     try {
         await api.deposit(amount, address);
-        alert('Deposit confirmed! Balance updated.');
-        window.location.href = 'index.html';
+        Toast.success('Deposit confirmed! Balance updated.');
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1500);
     } catch (err) {
-        alert(err.message || 'Deposit failed');
+        Toast.error(err.message || 'Deposit failed');
+        setButtonLoading(btn, false);
     }
 }
