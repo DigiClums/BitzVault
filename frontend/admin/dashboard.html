@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <div class="admin-panel">
+        <aside class="sidebar">
+            <h2>Admin Panel</h2>
+            <nav>
+                <a href="#" onclick="showSection('dashboard')" class="active">📊 Dashboard</a>
+                <a href="#" onclick="showSection('users')">👥 Users</a>
+                <a href="#" onclick="showSection('transactions')">💰 Transactions</a>
+                <a href="#" onclick="showSection('mining')">⚙️ Mining</a>
+                <a href="#" onclick="showSection('settings')">⚙️ Settings</a>
+                <a href="#" onclick="logout()">🚪 Logout</a>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <div id="dashboard" class="section active">
+                <h1>Dashboard</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Users</h3>
+                        <p class="stat-value" id="totalUsers">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Balance</h3>
+                        <p class="stat-value" id="totalBalance">0 USDT</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Transactions</h3>
+                        <p class="stat-value" id="totalTransactions">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Mining Machines</h3>
+                        <p class="stat-value" id="totalMining">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="users" class="section">
+                <h1>Users Management</h1>
+                <div class="table-container">
+                    <table id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Phone</th>
+                                <th>Balance</th>
+                                <th>Invite Code</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="transactions" class="section">
+                <h1>Transactions</h1>
+                <div class="table-container">
+                    <table id="transactionsTable">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="mining" class="section">
+                <h1>Mining Machines</h1>
+                <div class="table-container">
+                    <table id="miningTable">
+                        <thead>
+                            <tr>
+                                <th>Machine Name</th>
+                                <th>Price</th>
+                                <th>Income</th>
+                                <th>Period</th>
+                                <th>Start Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="miningBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="settings" class="section">
+                <h1>Settings</h1>
+                <div class="settings-form">
+                    <h3>Update User Balance</h3>
+                    <input type="text" id="userIdInput" placeholder="User ID">
+                    <input type="number" id="balanceInput" placeholder="New Balance">
+                    <button onclick="updateBalance()">Update Balance</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="admin-auth.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>
