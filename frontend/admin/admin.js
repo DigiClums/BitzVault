@@ -1,11 +1,37 @@
-const API_URL = '/api';
+const API_URL = window.location.hostname === 'localhost'
+    ? 'http://localhost:3001/api'
+    : '/api';
 
-function showSection(sectionId) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.sidebar nav a').forEach(a => a.classList.remove('active'));
+function setStatus(message, isError = false) {
+    const statusEl = document.getElementById('adminStatus');
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.className = `status-banner ${isError ? 'error' : 'success'}`;
+    statusEl.style.display = 'block';
+}
+
+function clearStatus() {
+    const statusEl = document.getElementById('adminStatus');
+    if (!statusEl) return;
+    statusEl.style.display = 'none';
+}
+
+async function request(path, options = {}) {
+    const response = await fetch(`${API_URL}${path}`, options);
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+        throw new Error(data.message || 'Request failed');
+    }
+    return data;
+}
+
+function showSection(evt, sectionId) {
+    clearStatus();
+    document.querySelectorAll('.section').forEach((s) => s.classList.remove('active'));
+    document.querySelectorAll('.sidebar nav a').forEach((a) => a.classList.remove('active'));
     document.getElementById(sectionId).classList.add('active');
-    event.target.classList.add('active');
-    
+    if (evt && evt.currentTarget) evt.currentTarget.classList.add('active');
+
     if (sectionId === 'dashboard') loadDashboard();
     if (sectionId === 'users') loadUsers();
     if (sectionId === 'transactions') loadTransactions();
@@ -14,19 +40,19 @@ function showSection(sectionId) {
 
 async function loadDashboard() {
     try {
-        const stats = await fetch(`${API_URL}/admin/stats`).then(r => r.json());
+        const stats = await request('/admin/stats');
         document.getElementById('totalUsers').textContent = stats.totalUsers;
         document.getElementById('totalBalance').textContent = stats.totalBalance.toFixed(2) + ' USDT';
         document.getElementById('totalTransactions').textContent = stats.totalTransactions;
         document.getElementById('totalMining').textContent = stats.totalMining;
     } catch (err) {
-        console.error('Failed to load dashboard:', err);
+        setStatus(`Failed to load dashboard: ${err.message}`, true);
     }
 }
 
 async function loadUsers() {
     try {
-        const users = await fetch(`${API_URL}/admin/users`).then(r => r.json());
+        const users = await request('/admin/users');
         const tbody = document.getElementById('usersBody');
         tbody.innerHTML = users.map(u => `
             <tr>
@@ -36,18 +62,18 @@ async function loadUsers() {
                 <td>${u.inviteCode}</td>
                 <td>
                     <button class="action-btn edit-btn" onclick="editUser('${u.userId}')">Edit</button>
-                    <button class="action-btn delete-btn" onclick="deleteUser(${u.id})">Delete</button>
+                    <button class="action-btn delete-btn" onclick="deleteUser('${u.id}')">Delete</button>
                 </td>
             </tr>
         `).join('');
     } catch (err) {
-        console.error('Failed to load users:', err);
+        setStatus(`Failed to load users: ${err.message}`, true);
     }
 }
 
 async function loadTransactions() {
     try {
-        const transactions = await fetch(`${API_URL}/admin/transactions`).then(r => r.json());
+        const transactions = await request('/admin/transactions');
         const tbody = document.getElementById('transactionsBody');
         tbody.innerHTML = transactions.map(t => `
             <tr>
@@ -56,18 +82,18 @@ async function loadTransactions() {
                 <td>${t.status}</td>
                 <td>${new Date(t.createdAt).toLocaleString()}</td>
                 <td>
-                    <button class="action-btn delete-btn" onclick="deleteTransaction(${t.id})">Delete</button>
+                    <button class="action-btn delete-btn" onclick="deleteTransaction('${t.id}')">Delete</button>
                 </td>
             </tr>
         `).join('');
     } catch (err) {
-        console.error('Failed to load transactions:', err);
+        setStatus(`Failed to load transactions: ${err.message}`, true);
     }
 }
 
 async function loadMining() {
     try {
-        const mining = await fetch(`${API_URL}/admin/mining`).then(r => r.json());
+        const mining = await request('/admin/mining');
         const tbody = document.getElementById('miningBody');
         tbody.innerHTML = mining.map(m => `
             <tr>
@@ -79,58 +105,70 @@ async function loadMining() {
             </tr>
         `).join('');
     } catch (err) {
-        console.error('Failed to load mining:', err);
+        setStatus(`Failed to load mining: ${err.message}`, true);
     }
 }
 
 async function updateBalance() {
     const userId = document.getElementById('userIdInput').value;
-    const balance = document.getElementById('balanceInput').value;
+    const balance = Number(document.getElementById('balanceInput').value);
     
-    if (!userId || !balance) {
-        alert('Please fill all fields');
+    if (!userId || Number.isNaN(balance) || balance < 0) {
+        setStatus('Please enter a valid user ID and non-negative balance.', true);
         return;
     }
     
     try {
-        await fetch(`${API_URL}/admin/update-balance`, {
+        await request('/admin/update-balance', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId, balance: parseFloat(balance) })
+            body: JSON.stringify({ userId, balance })
         });
-        alert('Balance updated successfully');
+        setStatus(`Balance updated for ${userId}.`);
         document.getElementById('userIdInput').value = '';
         document.getElementById('balanceInput').value = '';
+        loadUsers();
+        loadDashboard();
     } catch (err) {
-        alert('Failed to update balance');
+        setStatus(`Failed to update balance: ${err.message}`, true);
     }
 }
 
 async function deleteUser(id) {
     if (!confirm('Delete this user?')) return;
     try {
-        await fetch(`${API_URL}/admin/users/${id}`, { method: 'DELETE' });
+        await request(`/admin/users/${id}`, { method: 'DELETE' });
+        setStatus('User deleted.');
+        loadDashboard();
         loadUsers();
     } catch (err) {
-        alert('Failed to delete user');
+        setStatus(`Failed to delete user: ${err.message}`, true);
     }
 }
 
 async function deleteTransaction(id) {
     if (!confirm('Delete this transaction?')) return;
     try {
-        await fetch(`${API_URL}/admin/transactions/${id}`, { method: 'DELETE' });
+        await request(`/admin/transactions/${id}`, { method: 'DELETE' });
+        setStatus('Transaction deleted.');
+        loadDashboard();
         loadTransactions();
     } catch (err) {
-        alert('Failed to delete transaction');
+        setStatus(`Failed to delete transaction: ${err.message}`, true);
     }
 }
 
 function editUser(userId) {
-    const newBalance = prompt('Enter new balance:');
-    if (newBalance) {
-        updateBalance();
+    const newBalance = prompt(`Enter new balance for ${userId}:`);
+    if (newBalance === null) return;
+    const parsed = Number(newBalance);
+    if (Number.isNaN(parsed) || parsed < 0) {
+        setStatus('Invalid balance amount.', true);
+        return;
     }
+    document.getElementById('userIdInput').value = userId;
+    document.getElementById('balanceInput').value = parsed;
+    updateBalance();
 }
 
 // Load dashboard on page load

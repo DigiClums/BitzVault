@@ -96,6 +96,25 @@ body {
     overflow-y: auto;
 }
 
+.status-banner {
+    margin-bottom: 20px;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.status-banner.success {
+    background: #eaf8f0;
+    color: #1f7a48;
+    border: 1px solid #bfe8cf;
+}
+
+.status-banner.error {
+    background: #fdecec;
+    color: #9f2f2f;
+    border: 1px solid #f1b5b5;
+}
+
 .section {
     display: none;
 }
