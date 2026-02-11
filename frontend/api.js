@@ -1,4 +1,6 @@
-const API_URL = 'http://localhost:3001/api';
+const API_URL = 'https://bitzvault.onrender.com';
+
+// const API_URL = 'http://localhost:3001/api';
 
 const api = {
   async register(phone, password, inviteCode) {
