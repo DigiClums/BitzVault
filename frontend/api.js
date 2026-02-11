@@ -4,7 +4,7 @@ const API_URL = 'https://bitzvault.onrender.com/api';
 
 const api = {
   async register(phone, password, inviteCode) {
-    const res = await fetch(`${API_URL}/auth/signup`, {
+    const res = await fetch(`${API_URL}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ phone, password, inviteCode })
@@ -15,7 +15,7 @@ const api = {
   },
 
   async login(phone, password) {
-    const res = await fetch(`${API_URL}/auth/signin`, {
+    const res = await fetch(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ phone, password })
