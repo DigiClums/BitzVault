@@ -1,10 +1,4 @@
-const API_URL =
-  window.location.hostname === "localhost"
-    ? "http://localhost:3001/api"
-    : "https://bitz-vault-2j2zul8v0-digiclums-projects.vercel.app/api";
-
-
-//  const API_URL = 'http://localhost:3001/api';
+const API_URL = 'http://localhost:3001/api';
 
 const api = {
   async register(phone, password, inviteCode) {
