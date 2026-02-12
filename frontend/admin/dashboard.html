@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BitzVault Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-dashboard-page">
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>BitzVault Admin</h2>
+      <nav>
+        <a href="#" class="nav-link active" onclick="showSection(event, 'dashboard')">Dashboard</a>
+        <a href="#" class="nav-link" onclick="showSection(event, 'users')">Users</a>
+        <a href="#" class="nav-link" onclick="showSection(event, 'transactions')">Transactions</a>
+        <a href="#" class="nav-link" onclick="showSection(event, 'mining')">Mining</a>
+        <a href="#" class="nav-link" onclick="showSection(event, 'settings')">Settings</a>
+        <a href="#" class="nav-link" onclick="logout()">Logout</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <div id="status" class="status" style="display:none;"></div>
+
+      <section id="dashboard" class="panel active">
+        <header class="panel-header">
+          <h1>Dashboard</h1>
+          <button class="btn" onclick="loadDashboard()">Refresh</button>
+        </header>
+        <div class="stats-grid">
+          <article class="stat-card">
+            <h3>Total Users</h3>
+            <p id="totalUsers">0</p>
+          </article>
+          <article class="stat-card">
+            <h3>Total Balance</h3>
+            <p id="totalBalance">0 USDT</p>
+          </article>
+          <article class="stat-card">
+            <h3>Total Transactions</h3>
+            <p id="totalTransactions">0</p>
+          </article>
+          <article class="stat-card">
+            <h3>Total Mining</h3>
+            <p id="totalMining">0</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="users" class="panel">
+        <header class="panel-header">
+          <h1>Users</h1>
+          <button class="btn" onclick="loadUsers()">Refresh</button>
+        </header>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>User ID</th>
+                <th>Phone</th>
+                <th>Balance</th>
+                <th>Invite Code</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="transactions" class="panel">
+        <header class="panel-header">
+          <h1>Transactions</h1>
+          <button class="btn" onclick="loadTransactions()">Refresh</button>
+        </header>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="transactionsBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="mining" class="panel">
+        <header class="panel-header">
+          <h1>Mining</h1>
+          <button class="btn" onclick="loadMining()">Refresh</button>
+        </header>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Machine</th>
+                <th>Price</th>
+                <th>Income</th>
+                <th>Period</th>
+                <th>Start Date</th>
+              </tr>
+            </thead>
+            <tbody id="miningBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="settings" class="panel">
+        <header class="panel-header">
+          <h1>Settings</h1>
+        </header>
+        <div class="settings-card">
+          <h3>Update User Balance</h3>
+          <div class="stack">
+            <label>
+              User ID
+              <input id="userIdInput" type="text" placeholder="a123456789" />
+            </label>
+            <label>
+              Balance
+              <input id="balanceInput" type="number" min="0" step="0.01" placeholder="1000" />
+            </label>
+            <button class="btn primary" onclick="updateBalance()">Update</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="admin-auth.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

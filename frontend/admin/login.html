@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BitzVault Admin Login</title>
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body class="admin-login-page">
+  <main class="login-shell">
+    <section class="login-card">
+      <p class="eyebrow">BitzVault Control</p>
+      <h1>Admin Access</h1>
+      <p class="subtext">Sign in to manage users, balances, and transactions.</p>
+
+      <form id="adminLoginForm" class="stack">
+        <label>
+          Username
+          <input id="username" type="text" required autocomplete="username" />
+        </label>
+
+        <label>
+          Password
+          <input id="password" type="password" required autocomplete="current-password" />
+        </label>
+
+        <button type="submit" class="btn primary">Login</button>
+      </form>
+
+      <p id="loginError" class="error-text" style="display:none;"></p>
+    </section>
+  </main>
+
+  <script src="admin-auth.js"></script>
+  <script>
+    const ADMIN_USERNAME = 'admin';
+    const ADMIN_PASSWORD = 'admin123';
+
+    const form = document.getElementById('adminLoginForm');
+    const errorEl = document.getElementById('loginError');
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
+        errorEl.textContent = 'Invalid credentials.';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      localStorage.setItem('adminToken', 'admin-session');
+      window.location.href = 'dashboard.html';
+    });
+  </script>
+</body>
+</html>
