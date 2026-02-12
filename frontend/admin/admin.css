@@ -76,14 +76,16 @@ label {
   font-size: 14px;
 }
 
-input {
+input,
+select {
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 11px 12px;
   font-size: 14px;
 }
 
-input:focus {
+input:focus,
+select:focus {
   outline: 2px solid rgba(11, 107, 203, 0.2);
   border-color: var(--primary);
 }
@@ -204,11 +206,34 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   margin-bottom: 16px;
 }
 
 .panel-header h1 {
   font-size: 26px;
+}
+
+.users-header {
+  flex-wrap: wrap;
+}
+
+.users-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.users-toolbar input {
+  min-width: 280px;
+}
+
+.pagination-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .stats-grid {
@@ -262,7 +287,7 @@ th {
 }
 
 .settings-card {
-  max-width: 440px;
+  max-width: 520px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -288,5 +313,9 @@ th {
 
   .content {
     padding: 14px;
+  }
+
+  .users-toolbar input {
+    min-width: 180px;
   }
 }

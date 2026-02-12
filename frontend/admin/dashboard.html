@@ -49,9 +49,14 @@
       </section>
 
       <section id="users" class="panel">
-        <header class="panel-header">
+        <header class="panel-header users-header">
           <h1>Users</h1>
-          <button class="btn" onclick="loadUsers()">Refresh</button>
+          <div class="users-toolbar">
+            <input id="usersSearchInput" type="text" placeholder="Search by user ID, phone, invite code" />
+            <button class="btn" onclick="applyUsersSearch()">Search</button>
+            <button class="btn" onclick="resetUsersSearch()">Reset</button>
+            <button class="btn" onclick="loadUsers(1)">Refresh</button>
+          </div>
         </header>
         <div class="table-wrap">
           <table>
@@ -66,6 +71,11 @@
             </thead>
             <tbody id="usersBody"></tbody>
           </table>
+        </div>
+        <div class="pagination-row">
+          <button class="btn" onclick="prevUsersPage()">Prev</button>
+          <span id="usersPaginationInfo">Page 1 / 1</span>
+          <button class="btn" onclick="nextUsersPage()">Next</button>
         </div>
       </section>
 
@@ -82,6 +92,7 @@
                 <th>Amount</th>
                 <th>Status</th>
                 <th>Date</th>
+                <th>Note</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -113,20 +124,31 @@
 
       <section id="settings" class="panel">
         <header class="panel-header">
-          <h1>Settings</h1>
+          <h1>Balance Operations</h1>
         </header>
         <div class="settings-card">
-          <h3>Update User Balance</h3>
+          <h3>Credit / Debit User Balance</h3>
           <div class="stack">
             <label>
               User ID
               <input id="userIdInput" type="text" placeholder="a123456789" />
             </label>
             <label>
-              Balance
-              <input id="balanceInput" type="number" min="0" step="0.01" placeholder="1000" />
+              Operation
+              <select id="operationInput">
+                <option value="credit">Credit (+)</option>
+                <option value="debit">Debit (-)</option>
+              </select>
             </label>
-            <button class="btn primary" onclick="updateBalance()">Update</button>
+            <label>
+              Amount
+              <input id="amountInput" type="number" min="0.01" step="0.01" placeholder="100" />
+            </label>
+            <label>
+              Reason
+              <input id="reasonInput" type="text" maxlength="120" placeholder="Manual correction" />
+            </label>
+            <button class="btn primary" onclick="adjustBalance()">Apply Operation</button>
           </div>
         </div>
       </section>

@@ -11,7 +11,7 @@
     <section class="login-card">
       <p class="eyebrow">BitzVault Control</p>
       <h1>Admin Access</h1>
-      <p class="subtext">Sign in to manage users, balances, and transactions.</p>
+      <p class="subtext">Secure sign in for operations and support.</p>
 
       <form id="adminLoginForm" class="stack">
         <label>
@@ -24,7 +24,7 @@
           <input id="password" type="password" required autocomplete="current-password" />
         </label>
 
-        <button type="submit" class="btn primary">Login</button>
+        <button type="submit" class="btn primary" id="loginBtn">Login</button>
       </form>
 
       <p id="loginError" class="error-text" style="display:none;"></p>
@@ -33,26 +33,44 @@
 
   <script src="admin-auth.js"></script>
   <script>
-    const ADMIN_USERNAME = 'admin';
-    const ADMIN_PASSWORD = 'admin123';
+    const API_URL = window.location.hostname === 'localhost'
+      ? 'http://localhost:3001/api'
+      : 'https://bitzvault.onrender.com/api';
 
     const form = document.getElementById('adminLoginForm');
     const errorEl = document.getElementById('loginError');
+    const loginBtn = document.getElementById('loginBtn');
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
+      errorEl.style.display = 'none';
+      loginBtn.disabled = true;
+      loginBtn.textContent = 'Signing in...';
 
       const username = document.getElementById('username').value.trim();
       const password = document.getElementById('password').value;
 
-      if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
-        errorEl.textContent = 'Invalid credentials.';
-        errorEl.style.display = 'block';
-        return;
-      }
+      try {
+        const res = await fetch(`${API_URL}/admin/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+        const data = await res.json().catch(() => ({}));
 
-      localStorage.setItem('adminToken', 'admin-session');
-      window.location.href = 'dashboard.html';
+        if (!res.ok || !data.token) {
+          throw new Error(data.message || 'Login failed');
+        }
+
+        localStorage.setItem('adminToken', data.token);
+        window.location.href = 'dashboard.html';
+      } catch (error) {
+        errorEl.textContent = error.message || 'Login failed';
+        errorEl.style.display = 'block';
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Login';
+      }
     });
   </script>
 </body>

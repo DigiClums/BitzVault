@@ -1,9 +1,18 @@
+function isAdminPage(page) {
+  return page !== 'login.html';
+}
+
+function clearAdminSession() {
+  localStorage.removeItem('adminToken');
+}
+
 function checkAdminAuth() {
   const token = localStorage.getItem('adminToken');
   const page = window.location.pathname.split('/').pop();
 
-  if (!token && page !== 'login.html') {
+  if (!token && isAdminPage(page)) {
     window.location.href = 'login.html';
+    return;
   }
 
   if (token && page === 'login.html') {
@@ -12,7 +21,7 @@ function checkAdminAuth() {
 }
 
 function logout() {
-  localStorage.removeItem('adminToken');
+  clearAdminSession();
   window.location.href = 'login.html';
 }
 
